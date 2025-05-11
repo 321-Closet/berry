@@ -17,5 +17,5 @@ What does berry offer?
 Berry is useful for any type of project, whether it be fighting games, RTS games or RPG's
 
 Downloadable Extensions(packages that plug right into berry)
-- [berry-combat-packages]()
+- [berry-combat-packages](https://github.com/321-Closet/berry/tree/combat-packages)
 - [berry-RTS-packages]()
