@@ -18,4 +18,4 @@ Berry is useful for any type of project, whether it be fighting games, RTS games
 
 Downloadable Extensions(packages that plug right into berry)
 - [berry-combat-packages](https://github.com/321-Closet/berry/tree/combat-packages)
-- [berry-RTS-packages]()
+- [berry-RTS-packages](https://github.com/321-Closet/berry/tree/RTS-packages)
