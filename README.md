@@ -7,7 +7,7 @@ Why choose berry?
 What does berry offer?
 - networking libraries
 - replication libraries
-- standalone built humanoid system]
+- standalone built server authoritative character controller
 - runtime typechecking
 - includes rbx-utils by @sleitnick
 - observation callback libraries
