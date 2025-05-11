@@ -1,5 +1,5 @@
 # berry🫐
-berry is a lightweight extensible game framework designed for the ROBLOX engine. Berry is written in roblox-ts to be modular and customizable
+berry is a lightweight extensible game framework designed for the ROBLOX engine. Berry is written in ROBLOX-LUAU to be modular and customizable
 
 Why choose berry?
 - berry provides a suite of tools for developers to use in order to improve the overall development experience
