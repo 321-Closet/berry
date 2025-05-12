@@ -1,3 +1,4 @@
+# base
 Enum List - source/Enum-list
 Task Schedular - source/Task-Schedular (timer)
 Replicator - source/Replicator
@@ -12,3 +13,10 @@ Table Util - source/RBX-util/Table-Util
 Promise - source/promise
 Datastore - source/data-store
 Log Util - source/log-util
+
+# package-components
+RTS-packages - includes: BerryNoid, BerryCollisions, BerryRTS
+Combat-packages - includes: BerryBox, BerryAnimations, BeryCombat
+Rollback-Netcode-packages - includes: BerryRollback
+RPG-packages - includes: BerryAtmosphericAmbience, BerryExploration, BerryRPG, combat-packages
+FPS-packages - BerryViewModels, BulletCast
