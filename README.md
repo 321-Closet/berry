@@ -13,3 +13,6 @@ Note:
 Support for berry-ts is continuous but slower than standard berry, if getting the latest
 updates for the framework is the most important thing for you then it's safe to recommend that you
 use standard berry.
+
+powershell:
+git clone -b berry-ts git_http_address
