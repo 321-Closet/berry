@@ -7,7 +7,7 @@ is completely standalone from the LUAU edition and requires no dependacies from 
 To set up berry-ts:
 - Install ROBLOX-TS in a relevant directory
 - Install Rojo and call 'rojo serve' in a new terminal
-- git clone berry into the directory, and you have access to all of the typescript versions of berry code base
+- git clone berry into the directory, run build.py and you have access to all of the typescript versions of berry code base
 
 Note:
 Support for berry-ts is continuous but slower than standard berry, if getting the latest
