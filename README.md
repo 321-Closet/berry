@@ -1,21 +1,15 @@
-# berry🫐
-berry is a lightweight extensible game framework designed for the ROBLOX engine. Berry is written in ROBLOX-LUAU to be modular and customizable
+# berry-ts🫐
 
-Why choose berry?
-- berry provides a suite of tools for developers to use in order to improve the overall development experience
+berry-ts, is the typescript rewrite of the berry ROBLOX game framework. With berry's vision to support
+as many different groups of users as possible, berry supports the use of ROBLOX-TS, this version of berry
+is completely standalone from the LUAU edition and requires no dependacies from LUAU.
 
-What does berry offer?
-- networking libraries
-- replication libraries
-- standalone built server authoritative character controller
-- runtime typechecking
-- includes rbx-utils by @sleitnick
-- observation callback libraries
-- rollback netcode
-- optional downloadable extensions
+To set up berry-ts:
+- Install ROBLOX-TS in a relevant directory
+- Install Rojo and call 'rojo serve' in a new terminal
+- git clone berry into the directory, and you have access to all of the typescript versions of berry code base
 
-Berry is useful for any type of project, whether it be fighting games, RTS games or RPG's
-
-Downloadable Extensions(packages that plug right into berry)
-- [berry-combat-packages](https://github.com/321-Closet/berry/tree/combat-packages)
-- [berry-RTS-packages](https://github.com/321-Closet/berry/tree/RTS-packages)
+Note:
+Support for berry-ts is continuous but slower than standard berry, if getting the latest
+updates for the framework is the most important thing for you then it's safe to recommend that you
+use standard berry.
