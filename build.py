@@ -5,7 +5,7 @@ import shutil
 src_directory = os.getcwd() # get file current working directory
 
 # destination directory(audit as required):
-destination_directory = os.getcwd()+"/src" # use the script directory as the baseline of the destination
+destination_directory = os.getcwd()+"/berry/src/packages" # use the script directory as the baseline of the destination
 # /src should be edited to what ever file you wish to be created or moved to, e.g C:/berry/src/packages
 
 if not os.path.exists(destination_directory):
