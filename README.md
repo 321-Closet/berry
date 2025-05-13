@@ -14,8 +14,5 @@ Support for berry-ts is continuous but slower than standard berry, if getting th
 updates for the framework is the most important thing for you then it's safe to recommend that you
 use standard berry.
 
-ENSURE THAT ROBLOX-TS IS INSTALLED IN THE PROJECT DIRECTORY, OTHERWISE CRUCIAL FILE API WILL NOT BE FUNCTIONAL
-BERRY UTILZES THE FACT THAT ROBLOX-TS USES DIFFERENT API LIKE 'assert()' RATHER THAN 'console.assert()'.
- 
 powershell:
 git clone -b berry-ts git_http_address
