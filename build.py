@@ -27,7 +27,6 @@ for file in os.listdir(src_directory): # list out files
             tokens.remove('declare module "C:/berry/src/'+file_name+'"'+";")
             tokens[len(tokens)-1] = 'declare module "'+new_dir+"/"+file_name+'"'
             new_src = "\n".join(tokens)
-            print(new_src)
             file_data.seek(0)
             file_data.write(new_src)
             file_data.truncate()
