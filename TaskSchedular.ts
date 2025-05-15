@@ -1,0 +1,121 @@
+// @author: 321_Closet
+/*
+   @description: a multi-use schedular class to create task objects and schedule execution of threads and functions
+   in translation units
+*/
+
+export class ScheduleParams {
+   public PARAMS: number[] = []
+   constructor(repeat: number, wait: number) {
+      assert(repeat, "Attempt to create object schedule params with argument 1 missing or null");
+      assert(wait, "Attempt to create object schedule params with argument 2 missing or null")
+      this.PARAMS.insert(0, repeat); // n times to repeat
+      this.PARAMS.insert(1, wait); // n times to wait before repeating
+   }
+}
+
+export class c_TaskSchedular {
+   private schedule: any = {};
+   private RunLoop: any;
+   private ExecutionYield: number = 2;
+   constructor() {
+      return this;
+   }
+
+   /**
+    * @method Start: have the schedular object begin executing every single task withit its list
+    */
+   public Start() {
+       const self = this;
+      this.RunLoop = coroutine.create(function(){
+         while (true) {
+            task.wait(self.ExecutionYield)
+            for (const value of self.schedule) {
+               if (type(value.run) ===  "thread") 
+               {
+                  coroutine.resume(value, value.params);
+               } else if (type(value.run) === "function") 
+               {
+                  value(value.params);
+               }
+            }
+         }
+      }); 
+   } 
+
+   /**
+    * @method ModifyYield: change the yield of the RunLoop causing execution of a task to occur after n time has elapsed
+    */
+   public ModifyYield(n: number) {
+      this.ExecutionYield = n;
+   } 
+
+   /**
+    * @method ScheduleThread: add a thread to the schedulars object list of tasks
+    */
+   public ScheduleThread(params: any[], ScheduleParams: ScheduleParams, co: thread) {
+      const recurse = ScheduleParams.PARAMS[0];
+       if (recurse > 0) {
+         const elapse= ScheduleParams.PARAMS[1];
+
+         for (let i =0; i <= recurse; i++) {
+            task.wait(elapse);
+            coroutine.resume(co, params);
+         }
+       } else if (this.RunLoop) {
+         this.schedule.insert(this.schedule.length, {params : params, run : co});
+       }
+   }
+
+   /**
+    * @method ScheduleFunction: add a function to the schedulars object list of tasks
+    * Note: functions are given parameters as tables of given values, scheduled functions should
+    * ensure to read the values from the given hashmaps correctly, parameters supplied for scheduled functions
+    * must be in a hash format with key-value pairs for indexing
+    * Example(luau): local function(parameters: {}) 
+    *    print(parameters.Name)
+    * end
+    */
+   public ScheduleFunction(params: any[], ScheduleParams: ScheduleParams, fn: (params: any[])=>any) {
+      assert(ScheduleParams, "Attempt to call function ScheduleFunction with missing argument #2")
+      assert(fn, "Attempt to call function ScheduleFunction with missing argument #3")
+      const recurse = ScheduleParams.PARAMS[0];
+      if (recurse > 0) {
+         const elapse= ScheduleParams.PARAMS[1];
+        let co = coroutine.wrap(function(): any[]{
+            let results: any[] = [];
+            let offset = 0;
+            for (let i = 0; i <= recurse; i++) {
+               task.wait(elapse)
+               const result = fn(params);
+               results.insert(offset, result);
+               offset += 1;
+            }
+
+            return results;
+         })
+
+         return co();
+      } else if (this.RunLoop) {
+         this.schedule.insert(this.schedule.length, {params : params, run : fn});
+      }
+   }
+
+   /**
+    * @method Spawn: run a function or thread immediately through the schedular
+    */
+   public Spawn(f: ()=>void | thread) {
+      task.spawn(f);
+   }
+
+   /**
+    * @method SpawnAfter: run a function or thread immediately through the schedular after n has elapsed
+    */
+   public SpawnAfter(wait: number, f: ()=>void | thread) {
+      task.delay(wait, function() {
+         task.spawn(f);
+      })
+   }
+}
+
+declare module "C:/berry/src/TaskSchedular";
