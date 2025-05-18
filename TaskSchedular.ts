@@ -19,19 +19,11 @@ export class ScheduleParams {
 
 export class c_TaskSchedular {
    private schedule: {[key: string]: any} = {};
-   private ExecutionYield: number = 2;
    private ThreadCache: {[key: string]: any} = {};
    constructor() {
       const self = this
       return this;
    }
-
-   /**
-    * @method ModifyYield: change the yield of the RunLoop causing execution of a task to occur after n time has elapsed
-    */
-   public ModifyYield(n: number) {
-      this.ExecutionYield = n;
-   } 
 
    /**
     * @method ScheduleThread: add a thread to the schedulars object list of tasks
