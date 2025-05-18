@@ -16,6 +16,7 @@ export class ScheduleParams {
    }
 }
 
+
 export class c_TaskSchedular {
    private schedule: any = {};
    private RunLoop: any;
@@ -33,13 +34,19 @@ export class c_TaskSchedular {
       this.RunLoop = coroutine.create(function(){
          while (true) {
             task.wait(self.ExecutionYield)
-            for (const value of self.schedule) {
-               if (type(value.run) ===  "thread") 
+            for (const key in self.schedule) {
+               if (type(self.schedule[key].run) ===  "thread") 
                {
-                  coroutine.resume(value, value.params);
-               } else if (type(value.run) === "function") 
+                  coroutine.resume(self.schedule[key].run, self.schedule[key].params);
+                  if (self.schedule[key]) {
+                    delete self.schedule[key];
+                  }
+               } else if (type(self.schedule[key].run) === "function") 
                {
-                  value(value.params);
+                  self.schedule[key].run(self.schedule[key].params);
+                  if (self.schedule[key]) {
+                     delete self.schedule[key];
+                  }
                }
             }
          }
@@ -66,7 +73,7 @@ export class c_TaskSchedular {
             coroutine.resume(co, params);
          }
        } else if (this.RunLoop) {
-         this.schedule.insert(this.schedule.length, {params : params, run : co});
+         this.schedule[HttpService.GenerateGUID(false)] = {params : params, run : co};
        }
    }
 
@@ -100,7 +107,7 @@ export class c_TaskSchedular {
 
          return co();
       } else if (this.RunLoop) {
-         this.schedule.insert(this.schedule.length, {params : params, run : fn});
+         this.schedule[HttpService.GenerateGUID(false)] = {params : params, run : fn};
       }
    }
 
@@ -139,7 +146,31 @@ export class c_TaskSchedular {
       let co = this.ThreadCache[threadId];
       assert(co, "Unable to find thread from id")
 
-      coroutine.resume(co, args)
+      coroutine.resume(co, args);
+      delete this.schedule[threadId];
+   }
+
+   /**
+    * @method CancelThread: cancels the thread of given thread id
+    */
+   public CancelThread(threadId: string) {
+      assert(this.ThreadCache[threadId], "Attempt to cancel non-existant thread");
+      let co: thread = this.ThreadCache[threadId];
+      coroutine.yield(co);
+      coroutine.close(co);
+   }
+
+   /**
+    * @method PauseThread: Pauses the given thread from threadId until x has elapsed
+    */
+   public PauseThread(x: number, threadId: string) {
+      let co: thread = this.ThreadCache[threadId];
+      assert(co, "Attempt to pause non-existant thread");
+      coroutine.yield(co)
+
+      task.delay(x, function(){
+         coroutine.resume(co);
+      })
    }
 }
 
