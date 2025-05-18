@@ -4,6 +4,8 @@
    in translation units
 */
 
+const HttpService = game.GetService("HttpService");
+
 export class ScheduleParams {
    public PARAMS: number[] = []
    constructor(repeat: number, wait: number) {
@@ -18,6 +20,7 @@ export class c_TaskSchedular {
    private schedule: any = {};
    private RunLoop: any;
    private ExecutionYield: number = 2;
+   private ThreadCache: any = {};
    constructor() {
       return this;
    }
@@ -115,6 +118,28 @@ export class c_TaskSchedular {
       task.delay(wait, function() {
          task.spawn(f);
       })
+   }
+
+   /**
+    * @method CreateThread: returns a thread id of a new thread
+    */
+   public CreateThread(callback: ()=>any): string {
+      const threadId = HttpService.GenerateGUID(false);
+      let co = coroutine.create(callback);
+      this.ThreadCache[threadId] = co;
+      return threadId;
+   }
+
+   /**
+    * @method ResumeThread: resumes a thread from the given thread id
+    * @args: A mutable list of any
+    */
+   public ResumeThread(threadId: string, args: any[] | {}): void {
+      assert(threadId, "Attempt to resume thread with argument #1 missing or nil")
+      let co = this.ThreadCache[threadId];
+      assert(co, "Unable to find thread from id")
+
+      coroutine.resume(co, args)
    }
 }
 
