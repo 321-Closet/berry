@@ -18,40 +18,13 @@ export class ScheduleParams {
 
 
 export class c_TaskSchedular {
-   private schedule: any = {};
-   private RunLoop: any;
+   private schedule: {[key: string]: any} = {};
    private ExecutionYield: number = 2;
-   private ThreadCache: any = {};
+   private ThreadCache: {[key: string]: any} = {};
    constructor() {
+      const self = this
       return this;
    }
-
-   /**
-    * @method Start: have the schedular object begin executing every single task withit its list
-    */
-   public Start() {
-       const self = this;
-      this.RunLoop = coroutine.create(function(){
-         while (true) {
-            task.wait(self.ExecutionYield)
-            for (const key in self.schedule) {
-               if (type(self.schedule[key].run) ===  "thread") 
-               {
-                  coroutine.resume(self.schedule[key].run, self.schedule[key].params);
-                  if (self.schedule[key]) {
-                    delete self.schedule[key];
-                  }
-               } else if (type(self.schedule[key].run) === "function") 
-               {
-                  self.schedule[key].run(self.schedule[key].params);
-                  if (self.schedule[key]) {
-                     delete self.schedule[key];
-                  }
-               }
-            }
-         }
-      }); 
-   } 
 
    /**
     * @method ModifyYield: change the yield of the RunLoop causing execution of a task to occur after n time has elapsed
@@ -64,6 +37,8 @@ export class c_TaskSchedular {
     * @method ScheduleThread: add a thread to the schedulars object list of tasks
     */
    public ScheduleThread(params: any[], ScheduleParams: ScheduleParams, co: thread) {
+      assert(ScheduleParams, "Attempt to call function ScheduleFunction with missing argument #2")
+      assert(co, "Attempt to call function ScheduleFunction with missing argument #3")
       const recurse = ScheduleParams.PARAMS[0];
        if (recurse > 0) {
          const elapse= ScheduleParams.PARAMS[1];
@@ -72,8 +47,6 @@ export class c_TaskSchedular {
             task.wait(elapse);
             coroutine.resume(co, params);
          }
-       } else if (this.RunLoop) {
-         this.schedule[HttpService.GenerateGUID(false)] = {params : params, run : co};
        }
    }
 
@@ -106,8 +79,6 @@ export class c_TaskSchedular {
          })
 
          return co();
-      } else if (this.RunLoop) {
-         this.schedule[HttpService.GenerateGUID(false)] = {params : params, run : fn};
       }
    }
 
