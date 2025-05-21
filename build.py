@@ -24,7 +24,7 @@ for file in os.listdir(src_directory): # list out files
             new_dir = new_dir.replace("\\", "/")
             file_path = str.split(file_data.name, "/")
             file_name = file_path[len(file_path)-1].removesuffix(".ts")
-            tokens.remove('declare module "C:/berry/src/'+file_name+'"'+";")
+            tokens.remove('declare module "C:/berry/src/server/'+file_name+'"'+";")
             tokens[len(tokens)-1] = 'declare module "'+new_dir+"/"+file_name+'"'
             new_src = "\n".join(tokens)
             file_data.seek(0)
