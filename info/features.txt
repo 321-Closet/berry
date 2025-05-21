@@ -13,7 +13,6 @@ Table Util - source/RBX-util/Table-Util
 Promise - source/promise
 Datastore - source/data-store
 Log Util - source/log-util
-Humanoid 2.0 - source/humanoid-2.0
 Berry Main
 
 # package-components
