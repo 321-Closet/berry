@@ -4,7 +4,6 @@ Task Schedular - source/Task-Schedular (timer)
 Replicator - source/Replicator
 Monitor - source/Monitor
 Quaternion - source/RBX-util/quaternion
-Signal - source/signal
 Serilizer - source/serializer
 Shake - source/RBX-util/shake
 State Machine - source/State-Machine
