@@ -13,6 +13,7 @@ Table Util - source/RBX-util/Table-Util
 Promise - source/promise
 Datastore - source/data-store
 Log Util - source/log-util
+Berry Main
 
 # package-components
 RTS-packages - includes: BerryNoid, BerryCollisions, BerryRTS
