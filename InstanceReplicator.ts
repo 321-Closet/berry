@@ -160,5 +160,3 @@ export function CloseNetworkBridge(bridge: thread) {
 
     return true
 }
-
-declare module "C:/berry/src/InstanceReplicator";
