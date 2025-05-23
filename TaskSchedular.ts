@@ -136,5 +136,3 @@ export class c_TaskSchedular {
       })
    }
 }
-
-declare module "C:/berry/src/TaskSchedular";
