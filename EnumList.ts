@@ -46,4 +46,3 @@ export class c_EnumList {
 	}
 }
 
-declare module "C:/berry/src/EnumList";
